@@ -30,10 +30,14 @@
     _mainlist.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:_mainlist];
 //
-    _datas = @[@"message nomal",@"message icon",@"status succss",@"status success countDown",@"status fail", @"error desc" ,@"list content", @"custom",@"sheet"];
+    _datas = @[@"message nomal",@"message icon",@"status succss",@"status success countDown",@"status fail", @"error desc" ,@"list content", @"custom",@"sheet",@"items matrix sheet"];
     [_mainlist reloadData];
+    
+   
 }
-
+- (void)injected{
+    [self viewDidLoad];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _datas.count;
 }
@@ -103,6 +107,31 @@
         case 8:
         {
             [SBAlertController alertWithContents:nil title:@"Message" cancleTitle:@"cancle"];
+        }
+            break;
+        case 9:
+        {
+            UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+            layout.itemSize = CGSizeMake(50, 60);
+            layout.minimumInteritemSpacing = 10;
+            layout.minimumLineSpacing = 10L;
+            layout.sectionInset = UIEdgeInsetsMake(10, 10, 0, 10);
+            [SBAlertController alertWithItemLayout:layout
+                                         itemCount:15
+                                 itemForRowAtIndex:^UIView *(id<SBAlertDelegate> alertView, NSInteger index) {
+                                        UIButton *item = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, layout.itemSize.width, layout.itemSize.height)];
+                                        [item setImage:[UIImage imageNamed:@"tb_risk"] forState:UIControlStateNormal];
+                                        [item setTitle:@"Wechat" forState:UIControlStateNormal];
+                                        item.titleLabel.font = [UIFont systemFontOfSize:14];
+                                        [item setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                                        [item setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 15, 0)];
+                                        [item setTitleEdgeInsets:UIEdgeInsetsMake(45, 0, 0, 0)];
+                                        return item;
+                                 } didSelectedItemAtIndex:^(id<SBAlertDelegate> alertView, NSInteger index) {
+                                     NSLog(@"selected %ld",index);
+                                 }
+                                             title:@"标准Item方阵"
+                                       cancleTitle:@"cancle"];
         }
             break;
         default:

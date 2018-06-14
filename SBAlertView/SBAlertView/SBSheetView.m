@@ -14,7 +14,6 @@ static CGFloat topDistance = 0;
 
 @interface SBSheetView () <CAAnimationDelegate>
 @property (nonatomic) NSArray *layoutItems;
-@property (nonatomic) UIScrollView *mainView;
 @end
 @implementation SBSheetView
 {
@@ -43,12 +42,6 @@ static CGFloat topDistance = 0;
     self.clipsToBounds = YES;
     self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0);
     self.backgroundColor = [UIColor whiteColor];
-    
-    _mainView = [[UIScrollView alloc] init];
-    _mainView.bounces = NO;
-    _mainView.showsVerticalScrollIndicator = NO;
-    _mainView.showsHorizontalScrollIndicator = NO;
-    [self addSubview:_mainView];
 }
 - (void)alertLayouts{
     UIView *previous = nil;
@@ -70,15 +63,12 @@ static CGFloat topDistance = 0;
         if (previous == nil) {
             item.center = CGPointMake(item.center.x, item.center.y+topDistance);
         }
-        [_mainView addSubview:item];
+        [self addSubview:item];
         //作为previous 结束
         previous = item;
     }
     //height
     CGFloat height = CGRectGetMaxY(previous.frame);
-    if (height > [UIScreen mainScreen].bounds.size.height/2) {
-        height = [UIScreen mainScreen].bounds.size.height/2;
-    }
     _privateFrame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height-height, alertWidth, height);
 }
 
@@ -91,6 +81,13 @@ static CGFloat topDistance = 0;
     for (int i = 0; i < self.items.count; i ++) {
         UIView *item = self.items[i];
         if (item.sb_parallel) {
+            if (item.sb_newline && previous.sb_parallel) {
+                NSInteger count = news.count;
+                [news addObject:@(count)];//插入占位符号
+                [indexs addObject:@(count)];
+                [datas addObject:collections];
+                collections = nil;
+            }
             if (!collections) collections = [NSMutableArray new];
             [collections addObject:item];
         }
@@ -130,6 +127,7 @@ static CGFloat topDistance = 0;
     }
     return news.copy;
 }
+
 #pragma mark    -  SBAlertDelegate
 - (UIAlertControllerStyle)alertStyle{
     return UIAlertControllerStyleActionSheet;
