@@ -49,4 +49,44 @@
 - (BOOL)sb_maxWidthBase{
     return [objc_getAssociatedObject(self, _cmd) boolValue];
 }
+
+- (void)setSb_newline:(BOOL)sb_newline{
+    objc_setAssociatedObject(self, @selector(sb_newline), @(sb_newline), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (BOOL)sb_newline{
+    return [objc_getAssociatedObject(self, _cmd) boolValue];
+}
+
+- (void)sb_setBlock:(id)block tag:(NSUInteger)tag alert:(id)alert{
+    objc_setAssociatedObject(self, "_sb.alert.action.block", block, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, "_sb.alert.action.tag", @(tag), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, "_sb.alert.action.alert", alert, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (id)sb_alert_actionBlock{
+    return objc_getAssociatedObject(self, "_sb.alert.action.block");
+}
+- (NSUInteger)sb_alert_actionTag{
+    return [objc_getAssociatedObject(self, "_sb.alert.action.tag") integerValue];
+}
+- (id)sb_alert_actionAlert{
+    return objc_getAssociatedObject(self, "_sb.alert.action.alert");
+}
+- (void)sb_addTapActionBlock:(void(^)(id alertView,NSUInteger index))actionBlock tag:(NSUInteger)tag alertView:(id)alertView{
+    [self sb_setBlock:actionBlock tag:tag alert:alertView];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sb_alertAction:)];
+    [self addGestureRecognizer:tap];
+    if (!self.userInteractionEnabled) {
+        self.userInteractionEnabled = YES;
+    }
+}
+
+
+- (void)sb_alertAction:(UIButton *)sender{
+    void(^actionBlock)(id alertView,NSUInteger index) = [self sb_alert_actionBlock];
+    if (actionBlock) {
+        actionBlock([self sb_alert_actionAlert],[self sb_alert_actionTag]);
+    }
+}
 @end

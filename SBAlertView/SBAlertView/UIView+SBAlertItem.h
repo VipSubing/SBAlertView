@@ -19,9 +19,13 @@
 @property (nonatomic) BOOL sb_parallel;
 // 最宽的基准 ，布局时将会以这个作为基准来设置外部Alert宽度 ，都没有找到将会以最宽item计算 默认 NO
 @property (nonatomic) BOOL sb_maxWidthBase;
+//换行
+@property (nonatomic) BOOL sb_newline;
 
-//#pragma mark   -  Private
+#pragma mark   -  Private
 //
 //@property (nonatomic) NSInteger sb_alertIndex;
+
+- (void)sb_addTapActionBlock:(void(^)(id alertView,NSUInteger index))actionBlock tag:(NSUInteger)tag alertView:(id)alertView;
 
 @end
