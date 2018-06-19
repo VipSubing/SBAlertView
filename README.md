@@ -171,7 +171,7 @@ UIView+SBAlertItem ，作为自动布局的扩展属性，每一个属性将会�
 
 
 ## 示例
-![示例目录](http://macdown.uranusjr.com/static/images/logo-160.png)
+![image](https://github.com/pubin563783417/SBAlertView/blob/master/AlertImages/%E7%A4%BA%E4%BE%8B%E7%9B%AE%E5%BD%95.png)
   
   这里面定义了几个项目常用的Alert样式，为了方便调用，我用分类的方式来实现了。所以调用像这样：
   
@@ -185,12 +185,11 @@ UIView+SBAlertItem ，作为自动布局的扩展属性，每一个属性将会�
             } cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
  ```
 效果如下图：
-![效果图1](http://macdown.uranusjr.com/static/images/logo-160.png)  
-![效果图1](http://macdown.uranusjr.com/static/images/logo-160.png)  
-![效果图1](http://macdown.uranusjr.com/static/images/logo-160.png)  
-![效果图1](http://macdown.uranusjr.com/static/images/logo-160.png)  
-![效果图1](http://macdown.uranusjr.com/static/images/logo-160.png)  
-
+![image](https://github.com/pubin563783417/SBAlertView/blob/master/AlertImages/%E7%A4%BA%E4%BE%8B%E5%9B%BE%E7%89%871.png)  
+![image](https://github.com/pubin563783417/SBAlertView/blob/master/AlertImages/%E7%A4%BA%E4%BE%8B%E5%9B%BE%E7%89%872.png)  
+![image](https://github.com/pubin563783417/SBAlertView/blob/master/AlertImages/%E7%A4%BA%E4%BE%8B%E5%9B%BE%E7%89%873.png)  
+![image](https://github.com/pubin563783417/SBAlertView/blob/master/AlertImages/%E7%A4%BA%E4%BE%8B%E5%9B%BE%E7%89%874.png)  
+ 
 如果你的Alert将会很复杂，或者它的样式多样无法统一定制，SBAlert将会适合你。
 
 Git地址:  <https://github.com/pubin563783417/SBAlertView>
