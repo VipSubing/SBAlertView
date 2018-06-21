@@ -13,13 +13,13 @@
 @interface SBAlertQueue : NSObject
 
 + (instancetype)sharedInstance;
-
+// 添加 Alert
 - (void)addAlert:(id)alertView;
-
+// 移除 Alert
 - (void)removeAlert:(id)alertView;
-
+// Alert Count
 - (NSInteger)alertsCount;
-
+//队列顶部Alert
 - (id)topAlert;
 
 @end
