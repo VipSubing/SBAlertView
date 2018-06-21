@@ -9,6 +9,8 @@
 #import "SBAlertController+Sheet.h"
 #import "SBAlertButton.h"
 
+#define DefaultPFFontPt(Pt) [UIFont fontWithName:@"PingFangSC-Regular" size:Pt]
+
 @implementation SBAlertController (Sheet)
 
 + (id <SBAlertDelegate>)alertWithContents:(NSArray *(^)(id <SBAlertDelegate> alert))contents
@@ -18,7 +20,7 @@
     NSMutableArray *items = [NSMutableArray new];
     if (title.length) {
         UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.font = [UIFont systemFontOfSize:15];
+        titleLabel.font = DefaultPFFontPt(15);
         titleLabel.textColor = [UIColor darkTextColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.text = title;
@@ -42,7 +44,7 @@
     SBAlertButton *cancleButton = [[SBAlertButton alloc] init];
     [cancleButton setTitle:cancleTitle forState:UIControlStateNormal];
     [cancleButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
-    cancleButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    cancleButton.titleLabel.font = DefaultPFFontPt(14) ;
     [cancleButton addActionBlock:cancleBlock tag:baesTag alertView:alert];
     cancleButton.sb_itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, 35);
     CALayer *cancleTopLine = [CALayer layer];

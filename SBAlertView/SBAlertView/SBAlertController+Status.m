@@ -10,6 +10,8 @@
 #import "SBAlertButton.h"
 #import "SBAlertController+_Message.h"
 
+#define DefaultPFFontPt(Pt) [UIFont fontWithName:@"PingFangSC-Regular" size:Pt]
+
 @implementation SBAlertController (Status)
 
 + (id <SBAlertDelegate> )showErrorWithTitle:(NSString *)title
@@ -78,11 +80,9 @@
     }
     if (title.length) {
         UILabel *titleLabel = [self titleLabel];
-        titleLabel.font = [UIFont systemFontOfSize:15];
+        titleLabel.font = DefaultPFFontPt(15);
         titleLabel.text = title;
-        CGFloat itemheight = [title boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size.height+1;
-        titleLabel.sb_itemSize = CGSizeMake(alertwidth-30, itemheight);
-        titleLabel.sb_boundsInsets = UIEdgeInsetsMake(15, 0, 0, 0);
+        
         if (titleAttributes[NSFontAttributeName]) {
             titleLabel.font = titleAttributes[NSFontAttributeName];
         }
@@ -92,12 +92,15 @@
         if (titleAttributes[kNSTextAlignmentKey]) {
             titleLabel.textAlignment = (NSTextAlignment)[titleAttributes[kNSTextAlignmentKey] integerValue];
         }
+        CGFloat itemheight = [title boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size.height+1;
+        titleLabel.sb_itemSize = CGSizeMake(alertwidth-30, itemheight);
+        titleLabel.sb_boundsInsets = UIEdgeInsetsMake(15, 0, 0, 0);
         [items addObject:titleLabel];
     }
     if (descTitle.length) {
         UILabel *descTitleLabel = [self titleLabel];
         descTitleLabel.text = descTitle;
-        descTitleLabel.font = [UIFont systemFontOfSize:15];
+        descTitleLabel.font = DefaultPFFontPt(15);
         descTitleLabel.textAlignment = NSTextAlignmentLeft;
         descTitleLabel.sb_itemSize = CGSizeMake(alertwidth-30, 30);
         descTitleLabel.sb_boundsInsets = UIEdgeInsetsMake(15, 0, 0, 0);
@@ -107,10 +110,6 @@
         UILabel *descLabel = [self messageLabel];
         descLabel.textAlignment = NSTextAlignmentLeft;
         descLabel.text = desc;
-        
-        CGFloat itemheight = [desc boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:descLabel.font} context:nil].size.height+1;
-        descLabel.sb_itemSize = CGSizeMake(alertwidth-30, itemheight);
-        descLabel.sb_boundsInsets = UIEdgeInsetsMake(15, 0, 0, 0);
         if (descAttributes[NSFontAttributeName]) {
             descLabel.font = descAttributes[NSFontAttributeName];
         }
@@ -120,6 +119,9 @@
         if (descAttributes[kNSTextAlignmentKey]) {
             descLabel.textAlignment = (NSTextAlignment)[descAttributes[kNSTextAlignmentKey] integerValue];
         }
+        CGFloat itemheight = [desc boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:descLabel.font} context:nil].size.height+1;
+        descLabel.sb_itemSize = CGSizeMake(alertwidth-30, itemheight);
+        descLabel.sb_boundsInsets = UIEdgeInsetsMake(15, 0, 0, 0);
         [items addObject:descLabel];
     }
     
@@ -260,7 +262,7 @@
 + (UILabel *)status_titleLabel{
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor blackColor];
-    titleLabel.font = [UIFont systemFontOfSize:15];
+    titleLabel.font = DefaultPFFontPt(15);
     titleLabel.numberOfLines = 0;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     return titleLabel;

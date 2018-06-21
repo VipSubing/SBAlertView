@@ -9,6 +9,7 @@
 #import "SBAlertController+_Message.h"
 #import "SBAlertButton.h"
 
+#define DefaultPFFontPt(Pt) [UIFont fontWithName:@"PingFangSC-Regular" size:Pt]
 
 NSString *const kNSTextAlignmentKey = @"kNSTextAlignmentKey";
 
@@ -81,9 +82,7 @@ NSString *const kNSTextAlignmentKey = @"kNSTextAlignmentKey";
     if (title.length) {
         UILabel *titleLabel = [self titleLabel];
         titleLabel.text = title;
-        CGFloat itemheight = [title boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size.height+1;
-        titleLabel.sb_itemSize = CGSizeMake(alertwidth-30, itemheight);
-        titleLabel.sb_boundsInsets = UIEdgeInsetsMake(icon?10:20, 0, 0, 0);
+        
         if (titleAttributes[NSFontAttributeName]) {
             titleLabel.font = titleAttributes[NSFontAttributeName];
         }
@@ -93,15 +92,15 @@ NSString *const kNSTextAlignmentKey = @"kNSTextAlignmentKey";
         if (titleAttributes[kNSTextAlignmentKey]) {
             titleLabel.textAlignment = (NSTextAlignment)[titleAttributes[kNSTextAlignmentKey] integerValue];
         }
+        CGFloat itemheight = [title boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size.height+1;
+        titleLabel.sb_itemSize = CGSizeMake(alertwidth-30, itemheight);
+        titleLabel.sb_boundsInsets = UIEdgeInsetsMake(icon?10:20, 0, 0, 0);
         [items addObject:titleLabel];
     }
     if (message.length) {
         UILabel *messageLabel = [self messageLabel];
         messageLabel.text = message;
         
-        CGFloat itemheight = [message boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:messageLabel.font} context:nil].size.height+1;
-        messageLabel.sb_itemSize = CGSizeMake(alertwidth-30, itemheight);
-        messageLabel.sb_boundsInsets = UIEdgeInsetsMake(15, 0, 15, 0);
         if (messageAttributes[NSFontAttributeName]) {
             messageLabel.font = messageAttributes[NSFontAttributeName];
         }
@@ -111,6 +110,9 @@ NSString *const kNSTextAlignmentKey = @"kNSTextAlignmentKey";
         if (messageAttributes[kNSTextAlignmentKey]) {
             messageLabel.textAlignment = (NSTextAlignment)[messageAttributes[kNSTextAlignmentKey] integerValue];
         }
+        CGFloat itemheight = [message boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:messageLabel.font} context:nil].size.height+1;
+        messageLabel.sb_itemSize = CGSizeMake(alertwidth-30, itemheight);
+        messageLabel.sb_boundsInsets = UIEdgeInsetsMake(15, 0, 15, 0);
         [items addObject:messageLabel];
     }
     
@@ -154,7 +156,7 @@ NSString *const kNSTextAlignmentKey = @"kNSTextAlignmentKey";
 }
 + (SBAlertButton *)otherButton{
     SBAlertButton *button = [[SBAlertButton alloc] init];
-    [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [button.titleLabel setFont:DefaultPFFontPt(15)];
     button.layer.masksToBounds = YES;
     button.layer.cornerRadius = 5;
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -164,7 +166,7 @@ NSString *const kNSTextAlignmentKey = @"kNSTextAlignmentKey";
 }
 + (SBAlertButton *)cancleButtonWithButtonCount:(NSInteger)count{
     SBAlertButton *cancelButton = [[SBAlertButton alloc] init];
-    [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [cancelButton.titleLabel setFont:DefaultPFFontPt(15)];
     cancelButton.layer.masksToBounds = YES;
     cancelButton.layer.cornerRadius = 5;
     if (count == 1) {
@@ -182,7 +184,7 @@ NSString *const kNSTextAlignmentKey = @"kNSTextAlignmentKey";
 + (UILabel *)titleLabel{
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor blackColor];
-    titleLabel.font = [UIFont boldSystemFontOfSize:15];
+    titleLabel.font = DefaultPFFontPt(15) ;
     titleLabel.numberOfLines = 0;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     return titleLabel;
@@ -190,7 +192,7 @@ NSString *const kNSTextAlignmentKey = @"kNSTextAlignmentKey";
 + (UILabel *)messageLabel{
     UILabel *messageLabel = [[UILabel alloc] init];
     messageLabel.textColor = [UIColor grayColor];
-    messageLabel.font = [UIFont systemFontOfSize:14];
+    messageLabel.font = DefaultPFFontPt(14) ;
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
     return messageLabel;
