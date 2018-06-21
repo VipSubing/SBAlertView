@@ -62,6 +62,7 @@
         {
             [SBAlertController showAlertWithTitle:@"Do any additional setup" message:@"Do any additional setup after loading the view, typically from a nib" icon:[UIImage imageNamed:@"tb_download"] completionBlock:^(NSUInteger buttonIndex, id <SBAlertDelegate> alertView) {
                 if (buttonIndex == 1) {
+                    [alertView dissmiss];
                     NSLog(@"sure");
                 }
             } cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
@@ -87,6 +88,7 @@
             [SBAlertController showErrorWithTitle:@"实名认证未通过" descTitle:@"不通过原因：" desc:@"用户在注册之前，应当仔细阅读本协议，并同意遵守本协议后方可成为注册用户。" completionBlock:^(NSUInteger buttonIndex, id <SBAlertDelegate> alertView) {
                 if (buttonIndex == 1) {
                     NSLog(@"do something");
+                    [alertView dissmiss];
                 }
             } cancelButtonTitle:@"关闭" otherButtonTitles:@"重新提交",nil];
         }

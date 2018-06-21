@@ -11,8 +11,6 @@
 #import "SBAlertView.h"
 #import "SBSheetView.h"
 
-static BOOL appDidBecomeActiveFlag = NO;
-
 @interface SBAlertController ()<CAAnimationDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic) UIWindow *mainWindow;
 // alert window
@@ -113,27 +111,28 @@ static BOOL appDidBecomeActiveFlag = NO;
     }
 }
 - (void)firstShow{
-    //切换到 alert Window
-    [self.alertWindow makeKeyAndVisible];
-    
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-        self.mainWindow.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
-        [self.mainWindow tintColorDidChange];
-    }
-    [self addBackgroundView];
-    [self hide:NO];
-    // back animation
-    [self backgroundAnimationWithShow:YES completed:nil];
-    //直接显示
-    self.visible = YES;//标记正在显示
-    [self showWithAlert:[SBAlertQueue sharedInstance].topAlert];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //切换到 alert Window
+        [self.alertWindow makeKeyAndVisible];
+        
+        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+            self.mainWindow.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
+            [self.mainWindow tintColorDidChange];
+        }
+        [self addBackgroundView];
+        [self hide:NO];
+        // back animation
+        [self backgroundAnimationWithShow:YES completed:nil];
+        //直接显示
+        self.visible = YES;//标记正在显示
+        [self showWithAlert:[SBAlertQueue sharedInstance].topAlert];
+    });
 }
 
-- (void)showAlert:(SBAlertView *)alertView{
+- (void)showAlert:(id <SBAlertDelegate>)alertView{
     [[SBAlertQueue sharedInstance] addAlert:alertView];
-    
-    if (!self.isVisible && appDidBecomeActiveFlag) {
-        [self firstShow];
+    if ([[SBAlertQueue sharedInstance] topAlert] == alertView && !alertView.isVisible) {
+        [[SBAlertController shareAlert] firstShow];
     }
 }
 - (void)dissmiss{
@@ -183,20 +182,7 @@ static BOOL appDidBecomeActiveFlag = NO;
         }
     }
 }
-#pragma mark  -
-+ (void)appDidBecomeActive{
-    if (!appDidBecomeActiveFlag) {
-        appDidBecomeActiveFlag = YES;
-        id <SBAlertDelegate> topAlert = [[SBAlertQueue sharedInstance] topAlert];
-        if (topAlert && !topAlert.isVisible) {
-            [[SBAlertController shareAlert] firstShow];
-        }
-    }
-}
-+ (void)runloopObserve{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
-}
+
 
 #pragma mark   -  UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -213,9 +199,7 @@ shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRec
     return [self locationInBackgroundWithTouch:gestureRecognizer];
 }
 #pragma mark   -  Override
-+ (void)load{
-    [self runloopObserve];
-}
+
 - (SBAlertView *)alertView{
     return [[SBAlertQueue sharedInstance] topAlert];
 }

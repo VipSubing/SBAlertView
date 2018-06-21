@@ -7,7 +7,7 @@
 //
 
 #import "FormatViewController.h"
-#import "SBAlertController.h"
+#import "SBAlertHeader.h"
 @interface FormatViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic) UITableView *mainlist;
 @property (nonatomic) NSArray *datas;
@@ -24,7 +24,7 @@
     _mainlist.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:_mainlist];
     //
-    _datas = @[@"message nomal",@"message icon",@"status succss",@"status success countDown",@"status fail", @"error desc" ,@"list content", @"custom",@"sheet",@"items matrix sheet"];
+    _datas = @[@"format1",@"format2",@"format3",@"format4",@"format5"];
     [_mainlist reloadData];
 }
 
@@ -45,19 +45,38 @@
     switch (indexPath.row) {
         case 0:
         {
-            [SBAlertController showWithMessage:@"Do any additional setup after loading the view, typically from a nib."];
+            [SBAlertController showFailWithMessage:@"Do any additional setup after loading the view, typically from a nib. Do any additional setup after loading the view, typically from a nib."];
+           
         }
             break;
         case 1:
         {
-            [SBAlertController showAlertWithTitle:@"Do any additional setup" message:@"Do any additional setup after loading the view, typically from a nib" icon:[UIImage imageNamed:@"tb_download"] completionBlock:^(NSUInteger buttonIndex, id <SBAlertDelegate> alertView) {
-                if (buttonIndex == 1) {
-                    NSLog(@"sure");
-                }
-            } cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+            [SBAlertController showAlertWithTitle:@"Do any additional setup after loading the view, typically from a nib." message:nil icon:[UIImage imageNamed:@"tb_download"] completionBlock:^(NSUInteger buttonIndex, id<SBAlertDelegate> alertView) {
+                
+            } cancelButtonTitle:@"取消我的下载" otherButtonTitles:@"确定下载",nil];
         }
             break;
-        
+        case 2:
+        {
+            [SBAlertController showAlertWithTitle:@"Do any additional setup after loading the view, typically from a nib." message:@"Do any additional setup after loading the vie" icon:[UIImage imageNamed:@"tb_download"] completionBlock:^(NSUInteger buttonIndex, id<SBAlertDelegate> alertView) {
+                
+            } cancelButtonTitle:@"取消我的下载" otherButtonTitles:@"确定下载",nil];
+        }
+            break;
+        case 3:
+        {
+            [SBAlertController showAlertWithTitle:@"Do any additional setup after loading the view, typically from a nib." message:@"Do any additional setup after loading the vie" icon:nil completionBlock:^(NSUInteger buttonIndex, id<SBAlertDelegate> alertView) {
+                
+            } cancelButtonTitle:@"取消我的下载" otherButtonTitles:@"确定下载",nil];
+        }
+            break;
+        case 4:
+        {
+            [SBAlertController showAlertWithTitle:@"Do any additional setup after loading the view, typically from a nib." message:@"Do any additional setup after loading the vie" icon:nil completionBlock:^(NSUInteger buttonIndex, id<SBAlertDelegate> alertView) {
+                
+            } cancelButtonTitle:@"取消我的下载" otherButtonTitles:nil];
+        }
+            break;
         default:
             break;
     }

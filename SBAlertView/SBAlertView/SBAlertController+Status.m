@@ -187,7 +187,7 @@
                  completedBlock:(void(^)(void))completedBlock{
     id <SBAlertDelegate> alertView = [self alertViewWithStyle:UIAlertControllerStyleAlert];
     NSMutableArray *items = [NSMutableArray new];
-    
+    CGFloat alertwidth = [UIScreen mainScreen].bounds.size.width - 50;
     UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:success?@"success":@"fail"]];
     iconView.contentMode = UIViewContentModeScaleAspectFit;
     iconView.sb_itemSize = CGSizeMake(35, 35);
@@ -195,8 +195,8 @@
     [items addObject:iconView];
     
     UILabel *titleLabel = [self status_titleLabel];
-    CGFloat messageWidth = [message boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size.width+1;
-    titleLabel.sb_itemSize = CGSizeMake(messageWidth, 30);
+    CGFloat messageHeight = [message boundingRectWithSize:CGSizeMake(alertwidth-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:titleLabel.font} context:nil].size.height+1;
+    titleLabel.sb_itemSize = CGSizeMake(alertwidth-30, messageHeight);
     titleLabel.sb_boundsInsets = UIEdgeInsetsMake(10, 0, 0, 0);
     titleLabel.text = message;
     [items addObject:titleLabel];

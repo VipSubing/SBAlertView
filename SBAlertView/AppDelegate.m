@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "SBAlertHeader.h"
 @interface AppDelegate ()
 
 @end
@@ -16,6 +17,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [SBAlertController showWithMessage:@"Launch show Alert"];
     // Override point for customization after application launch.
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen] .bounds];
     _window.backgroundColor = [UIColor whiteColor];
