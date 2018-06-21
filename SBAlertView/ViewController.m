@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "SBAlertHeader.h"
 #import "SBAlertButton.h"
-
+#import "FormatViewController.h"
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic) UITableView *mainlist;
 @property (nonatomic) UITextField *textField;
@@ -30,7 +30,7 @@
     _mainlist.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:_mainlist];
 //
-    _datas = @[@"message nomal",@"message icon",@"status succss",@"status success countDown",@"status fail", @"error desc" ,@"list content", @"custom",@"sheet",@"items matrix sheet"];
+    _datas = @[@"message nomal",@"message icon",@"status succss",@"status success countDown",@"status fail", @"error desc" ,@"list content", @"custom",@"sheet",@"items matrix sheet",@"Others"];
     [_mainlist reloadData];
     
    
@@ -134,7 +134,13 @@
                                        cancleTitle:@"cancle"];
         }
             break;
+        
         default:
+        {
+            FormatViewController *format = [[FormatViewController alloc] init];
+            [self.navigationController pushViewController:format animated:YES];
+        }
+            
             break;
     }
 }

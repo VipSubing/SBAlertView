@@ -20,7 +20,9 @@
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen] .bounds];
     _window.backgroundColor = [UIColor whiteColor];
     [_window makeKeyAndVisible];
-    _window.rootViewController = [[ViewController alloc] init];
+    
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    _window.rootViewController = navi;
     NSLog(@"");
     return YES;
 }

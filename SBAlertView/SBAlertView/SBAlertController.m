@@ -63,7 +63,6 @@ static BOOL appDidBecomeActiveFlag = NO;
 }
 - (void)initContent{
     // init windows
-    _mainWindow = [self windowWithLevel:UIWindowLevelNormal];
     _alertWindow = [self windowWithLevel:UIWindowLevelAlert];
     if (!_alertWindow) {
         _alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -80,6 +79,12 @@ static BOOL appDidBecomeActiveFlag = NO;
     _backgroundTap.delegate = self;
     [_backgroundView addGestureRecognizer:_backgroundTap];
     [_alertWindow addSubview:_backgroundView];
+}
+- (UIWindow *)mainWindow{
+    if (_mainWindow == nil) {
+         _mainWindow = [self windowWithLevel:UIWindowLevelNormal];
+    }
+    return _mainWindow;
 }
 - (void)removeBackgroundView{
     [_backgroundView removeFromSuperview];

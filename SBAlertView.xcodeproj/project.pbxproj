@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17720A0720DB4FF2000269E6 /* FormatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17720A0620DB4FF2000269E6 /* FormatViewController.m */; };
 		179854B220C953170015EBD1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 179854B120C953170015EBD1 /* AppDelegate.m */; };
 		179854B520C953170015EBD1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179854B420C953170015EBD1 /* ViewController.m */; };
 		179854B820C953170015EBD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 179854B620C953170015EBD1 /* Main.storyboard */; };
@@ -61,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17720A0520DB4FF2000269E6 /* FormatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormatViewController.h; sourceTree = "<group>"; };
+		17720A0620DB4FF2000269E6 /* FormatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FormatViewController.m; sourceTree = "<group>"; };
 		179854AD20C953170015EBD1 /* SBAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		179854B020C953170015EBD1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		179854B120C953170015EBD1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				179854B120C953170015EBD1 /* AppDelegate.m */,
 				179854B320C953170015EBD1 /* ViewController.h */,
 				179854B420C953170015EBD1 /* ViewController.m */,
+				17720A0520DB4FF2000269E6 /* FormatViewController.h */,
+				17720A0620DB4FF2000269E6 /* FormatViewController.m */,
 				17BF7BBD20CF6081003C95B0 /* SBAlertView */,
 				179854B620C953170015EBD1 /* Main.storyboard */,
 				179854B920C953170015EBD1 /* Assets.xcassets */,
@@ -415,6 +420,7 @@
 				179855F020CE603C0015EBD1 /* SBAlertButton.m in Sources */,
 				17BF7CBA20D0CBE4003C95B0 /* SBSheetView.m in Sources */,
 				179855F620CE681C0015EBD1 /* SBAlertController+_Message.m in Sources */,
+				17720A0720DB4FF2000269E6 /* FormatViewController.m in Sources */,
 				179855E420CBD4520015EBD1 /* UIView+SBAlertItem.m in Sources */,
 				179854EA20CA24AB0015EBD1 /* SBAlertQueue.m in Sources */,
 				17BF7CC220D10225003C95B0 /* SBAlertController+Sheet.m in Sources */,
